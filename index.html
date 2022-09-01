@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Badge Generator</title>
+    <script type="text/javascript">
+        function startup() {
+            const status = document.querySelector('#status');
+            const status1 = document.querySelector('#status1');
+            const status2 = document.querySelector('#status2');
+
+            status.addEventListener('input', () => {
+                status1.textContent = status.value;
+                status2.textContent = status.value;
+            });
+
+            const topic = document.querySelector('#topic');
+            const topic1 = document.querySelector('#topic1');
+            const topic2 = document.querySelector('#topic2');
+
+            topic.addEventListener('input', () => {
+                topic1.textContent = topic.value;
+                topic2.textContent = topic.value;
+            });
+
+            const color = document.querySelector('#color');
+            const color1 = document.querySelector('#color1');
+            const color2 = document.querySelector('#color2');
+
+            color.addEventListener('input', () => {
+                color1.setAttribute('fill', color.value);
+                color2.setAttribute('fill', color.value);
+            });
+
+            const link = document.querySelector('#link');
+            document.querySelector('#download').addEventListener('click', () => {
+                const svg_data = `<svg xmlns="http://www.w3.org/2000/svg" width="90" height="20">
+    <linearGradient id="a" x2="0" y2="100%">
+        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+        <stop offset="1" stop-opacity=".1"/>
+    </linearGradient>
+    <rect rx="3" width="90" height="20" fill="#555"/>
+    <rect rx="3" x="37" width="53" height="20" fill="${color.value}"/>
+    <path fill="${color.value}" d="M37 0h4v20h-4z"/>
+    <rect rx="3" width="90" height="20" fill="url(#a)"/>
+    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+        <text x="19.5" y="15" fill="#010101" fill-opacity=".3">${topic.value}</text>
+        <text x="19.5" y="14">${topic.value}</text>
+        <text x="62.5" y="15" fill="#010101" fill-opacity=".3" id="status1">${status.value}</text>
+        <text x="62.5" y="14">${status.value}</text>
+    </g>
+</svg>`
+                link.download='badge.svg';
+                link.href = 'data:image/svg+xml;base64,' + btoa(svg_data);
+                link.click();
+            });
+
+        }
+
+
+    </script>
+</head>
+<body onload="startup();">
+    <div>
+        <h1>Preview</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="20">
+            <linearGradient id="a" x2="0" y2="100%">
+                <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+                <stop offset="1" stop-opacity=".1"/>
+            </linearGradient>
+            <rect rx="3" width="90" height="20" fill="#555"/>
+            <rect rx="3" x="37" width="53" height="20" fill="#40c010" id="color1"/>
+            <path fill="#40c010" d="M37 0h4v20h-4z" id="color2"/>
+            <rect rx="3" width="90" height="20" fill="url(#a)"/>
+            <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+                <text x="19.5" y="15" fill="#010101" fill-opacity=".3" id="topic1">build</text>
+                <text x="19.5" y="14" id="topic2">build</text>
+                <text x="62.5" y="15" fill="#010101" fill-opacity=".3" id="status1">passing</text>
+                <text x="62.5" y="14" id="status2">passing</text>
+            </g>
+        </svg>
+    </div>
+    <div>
+        <h1>Settings</h1>
+        <div><label for="color">Color:</label><input id="color" type="color" value="#40c010" /></div>
+        <div><label for="topic">Topic:</label><input id="topic" type="text" value="build" /></div>
+        <div><label for="status">Status:</label><input id="status" type="text" value="passing" /></div>
+        <div><input type='button' id="download" value="Download"><a id="link"></a></div>
+    </div>
+</body>
+</html>
