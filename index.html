@@ -58,8 +58,44 @@
 
 
     </script>
+    <style type="text/css">
+        .content {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            border: 1px solid black;
+            box-shadow: 5px 5px #d0d0d0;
+        }
+
+        h1 {
+            padding: 0 5px 0 5px;
+            background-color: black;
+            color: white;
+        }
+
+        svg {
+            margin:auto;
+        }
+
+        label{
+            margin-right: 5px;
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        input {
+            display: inline-block;
+        }        
+
+        .right {
+            text-align: right;
+        }
+
+    </style>
 </head>
 <body onload="startup();">
+    <div class="content">
     <div>
         <h1>Preview</h1>
         <svg xmlns="http://www.w3.org/2000/svg" width="90" height="20">
@@ -84,7 +120,8 @@
         <div><label for="color">Color:</label><input id="color" type="color" value="#40c010" /></div>
         <div><label for="topic">Topic:</label><input id="topic" type="text" value="build" /></div>
         <div><label for="status">Status:</label><input id="status" type="text" value="passing" /></div>
-        <div><input type='button' id="download" value="Download"><a id="link"></a></div>
+        <div class="right"><input type='button' id="download" value="Download"><a id="link"></a></div>
+    </div>
     </div>
 </body>
 </html>
